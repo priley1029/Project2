@@ -2,38 +2,41 @@ public class TargetedAd {
 
   public static void main(String[] args)
   {
-                  //Creates DataCollector Object and sets the required data.
     DataCollector collector = new DataCollector();
     collector.setData("socialMediaPosts.txt", "targetWords.txt");
-                  //Empty string which will contain usernames.
-    String users = "";                
-    for (int i = 0; i < 39; i++)
-    {
-                  //String containing the post.
+//this creates a new object that will be used to collect data
+    
+
+String users = "";
+//this will be where the usernames are stored
+
+    for (int i = 0; i < 39; i++){
       String currentPost = collector.getNextPost();
-                  //Boolean which will change to true depending on if its found or not
+      //this is the post
       boolean found = false;
-      for (int j = 0; j < 20; j ++)
-      {
+      //this makes sure if the target word is in a certain post that it is serveying
+
+      for (int j = 0; j < 20; j ++){
         String word = collector.getNextTargetWord();
-                  //String containing each of the 20 words which updates as the loop progresses.
-        if(currentPost.indexOf(word) >= 0)
-        {
+        //this contains all 20 words in order to update the loop
+        if(currentPost.indexOf(word) >= 0){
               found = true;
-                  //If a target word is found, the boolean is updated.
-           if(currentPost.contains("hotdog") || currentPost.contains("Hotdog"))
-           {
+              //If the word is found the statement is set to true
+           if(currentPost.contains("hotdog") || currentPost.contains("Hotdog")){
               found = false;
            }
         }
       }
+      
       if (found == true){
         users += currentPost.substring(0, currentPost.indexOf(" ")) + " ";
-                  //If true, it adds the username to the list
+        //Adds the username to the list if it has the key words
       }
     }
+
     collector.prepareAdvertisement("advertisement.txt", users, "Do you want your pets to be healthy? Buy Blue Buffalo pet food, suitable for both cats and dogs!");
-                  //Sends out the advertisement to the users that are added
+    //this actually generates the ad that it is ment to
   }
-  //end of class
+  
+
 }
